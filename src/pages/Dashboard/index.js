@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import ClimateDisplay from '../../components/climate'
 import Graph from '../../components/graph'
 import { Col, Switch } from 'antd'
+import axios from 'axios'
 
 const Container = styled.div`
     padding: 1rem;
@@ -52,6 +53,15 @@ const Item = styled.li`
 `
 
 class Dashboard extends Component {
+    componentDidMount() {
+        this.getClimateData();
+    }
+
+    async getClimateData() {
+        let res = await axios.get('/get-data');
+        this.setState({ climate: res.data })
+    }
+
     render() {
         return (
             <Layout>
@@ -78,7 +88,7 @@ class Dashboard extends Component {
                         <DisplayPanel>
                             {[1, 2].map(room => (
                                 <DataDisplay key={room}>
-                                    <ClimateDisplay room={room} />
+                                    <ClimateDisplay data={this.state.climate} room={room} />
                                     <Graph />
                                 </DataDisplay>
                             ))}
