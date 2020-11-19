@@ -56,10 +56,10 @@ const Climate = (props) => {
             <Container>
                 <DataPanel>
                     <DataIcon>
-                        <RiTempColdLine />
+                        <WiHumidity />
                     </DataIcon>
                     <Row>
-                        <InfoData>21 <Small>F</Small></InfoData>
+                        <InfoData>{props.climate.temperature.data || '-'} <Small>F</Small></InfoData>
                         <Divider />
                     </Row>
                 </DataPanel>
@@ -68,13 +68,13 @@ const Climate = (props) => {
                         <WiHumidity />
                     </DataIcon>
                     <Row>
-                        <InfoData>21 <Small>F</Small></InfoData>
+                        <InfoData>{props.climate.humidity.data || '-'} <Small>F</Small></InfoData>
                         <Divider />
                     </Row>
                 </DataPanel>
                 <DataPanel>
                     <DataIcon>
-                        <IoMdCloudy />
+                        <WiHumidity />
                     </DataIcon>
                     <Row>
                         <InfoData>21 <Small>F</Small></InfoData>

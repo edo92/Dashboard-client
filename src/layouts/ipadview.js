@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Col, Row } from 'antd'
 import styled from 'styled-components';
 import {
@@ -32,14 +33,41 @@ const InnerHeader = styled.div`
     background: #2c2d32;
 `
 
-const SideBar = () => (
-    <Container>
-        <Icon><BulbOutlined /></Icon>
-        <Icon><ExperimentOutlined /></Icon>
-        <Icon><ShareAltOutlined /></Icon>
-        <Icon><SettingOutlined /></Icon>
-    </Container>
-)
+const SideBar = (props) => {
+    const routes = [
+        {
+            name: 'dashboard',
+            to: '/',
+            icon: <BulbOutlined />
+        },
+        {
+            name: 'experiment',
+            to: '/experiment',
+            icon: <ExperimentOutlined />
+        },
+        {
+            name: 'test',
+            to: '/experiment',
+            icon: <ShareAltOutlined />
+        },
+        {
+            name: 'test2',
+            to: '/experiment',
+            icon: <SettingOutlined />
+        },
+    ]
+    return routes.map(route => {
+        const { pathname } = props.location;
+        const active = (route.to === pathname);
+        const dynStyle = { color: active ? 'blue' : '' };
+        
+        return (
+            <Link to={route.to} key={route.name}>
+                <Icon style={dynStyle}>{route.icon}</Icon>
+            </Link>
+        )
+    })
+}
 
 class IpadView extends Component {
     render() {
@@ -47,7 +75,7 @@ class IpadView extends Component {
             <DarkBackground>
                 <Row>
                     <Col md={2}>
-                        <SideBar />
+                        <SideBar {...this.props} />
                     </Col>
                     <Col md={22}>
                         <InnerHeader />
@@ -59,4 +87,4 @@ class IpadView extends Component {
     }
 }
 
-export default IpadView
+export default withRouter(IpadView)

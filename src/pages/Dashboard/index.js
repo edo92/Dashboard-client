@@ -53,13 +53,22 @@ const Item = styled.li`
 `
 
 class Dashboard extends Component {
+    state = {
+        climate: {
+            temperature: {},
+            humidity: {}
+        }
+    }
+
     componentDidMount() {
         this.getClimateData();
     }
 
-    async getClimateData() {
-        let res = await axios.get('/get-data');
-        this.setState({ climate: res.data })
+    getClimateData() {
+        setInterval(async () => {
+            const res = await axios.get('https://cb82a92e-0748-43f3-9ed3-4d60519febc4.mock.pstmn.io');
+            this.setState({ climate: res.data })
+        }, 3000);
     }
 
     render() {
@@ -88,7 +97,7 @@ class Dashboard extends Component {
                         <DisplayPanel>
                             {[1, 2].map(room => (
                                 <DataDisplay key={room}>
-                                    <ClimateDisplay data={this.state.climate} room={room} />
+                                    <ClimateDisplay climate={this.state.climate} room={room} />
                                     <Graph />
                                 </DataDisplay>
                             ))}
