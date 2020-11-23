@@ -59,7 +59,7 @@ const SideBar = (props) => {
     return routes.map(route => {
         const { pathname } = props.location;
         const active = (route.to === pathname);
-        const dynStyle = { color: active ? 'blue' : '' };
+        const dynStyle = { color: active ? '#188efa' : '' };
         
         return (
             <Link to={route.to} key={route.name}>

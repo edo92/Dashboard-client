@@ -66,7 +66,7 @@ class Dashboard extends Component {
 
     getClimateData() {
         setInterval(async () => {
-            const res = await axios.get('https://cb82a92e-0748-43f3-9ed3-4d60519febc4.mock.pstmn.io');
+            const res = await axios.get('/get-data');
             this.setState({ climate: res.data })
         }, 3000);
     }
