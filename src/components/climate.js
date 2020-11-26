@@ -48,18 +48,17 @@ const Title = styled.h4`
     text-shadow: 1;
 `
 
-const Climate = (props) => {
-    console.log('props', props)
+const Climate = ({ climate }) => {
     return (
         <div style={{ padding: '0.5rem' }}>
             <Title>Room 1{'\t'}<Badge status="success" /></Title>
             <Container>
                 <DataPanel>
                     <DataIcon>
-                        <WiHumidity />
+                        <RiTempColdLine />
                     </DataIcon>
                     <Row>
-                        <InfoData>{props.climate.temperature.data || '-'} <Small>F</Small></InfoData>
+                        <InfoData>{climate.temperature && Math.round(climate.temperature.data)} <Small>F</Small></InfoData>
                         <Divider />
                     </Row>
                 </DataPanel>
@@ -68,13 +67,13 @@ const Climate = (props) => {
                         <WiHumidity />
                     </DataIcon>
                     <Row>
-                        <InfoData>{props.climate.humidity.data || '-'} <Small>F</Small></InfoData>
+                        <InfoData>{climate.humidity && Math.round(climate.humidity.data)} <Small>F</Small></InfoData>
                         <Divider />
                     </Row>
                 </DataPanel>
                 <DataPanel>
                     <DataIcon>
-                        <WiHumidity />
+                        <IoMdCloudy />
                     </DataIcon>
                     <Row>
                         <InfoData>21 <Small>F</Small></InfoData>
