@@ -49,6 +49,7 @@ const Title = styled.h4`
 `
 
 const Climate = ({ climate }) => {
+    console.log('testing2', climate);
     return (
         <div style={{ padding: '0.5rem' }}>
             <Title>Room 1{'\t'}<Badge status="success" /></Title>

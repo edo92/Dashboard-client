@@ -70,8 +70,8 @@ class Dashboard extends Component {
     getClimateData() {
         setInterval(async () => {
             const res = await axios.get('/get-data');
-            console.log('client data', res.data);
-            this.setState({ climate: res.data })
+            this.setState(res.data);
+            console.log('data-->', res.data);
         }, 3000);
     }
 
