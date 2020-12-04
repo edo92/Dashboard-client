@@ -3,7 +3,9 @@ import Layout from '../../layouts/ipadview'
 import styled from 'styled-components'
 import ClimateDisplay from '../../components/climate'
 import Graph from '../../components/graph'
-import { Col, Switch } from 'antd'
+import { Col, Switch, Divider } from 'antd'
+import ProbDisplay from '../../components/prob';
+
 import axios from 'axios'
 
 const Container = styled.div`
@@ -19,7 +21,7 @@ const ControlPanel = styled.div`
     border-color: #383a3f;
     border-radius: 6px;
     margin-top: 1rem;
-    padding-left: 1rem
+    padding: 1rem
 `
 const DisplayPanel = styled.div`
     display: flex;
@@ -52,6 +54,7 @@ const Item = styled.li`
     margin-bottom: 10px;
 `
 
+
 class Dashboard extends Component {
     state = {
         climate: {
@@ -67,6 +70,7 @@ class Dashboard extends Component {
     getClimateData() {
         setInterval(async () => {
             const res = await axios.get('/get-data');
+            console.log('client data', res.data);
             this.setState({ climate: res.data })
         }, 3000);
     }
@@ -91,16 +95,67 @@ class Dashboard extends Component {
                                     </Wrapper>
                                 </Item>
                             </div>
+                            <div style={{ padding: '.5rem' }}>
+                                <div style={{ background: 'white' }}><Divider /></div>
+                                <Item>
+                                    <Small>Main Pump</Small>
+                                    <Wrapper >
+                                        <Switch size='small' defaultChecked />
+                                    </Wrapper>
+                                </Item>
+                                <Item>
+                                    <Small>Main Pump</Small>
+                                    <Wrapper>
+                                        <Switch defaultChecked size='small' />
+                                    </Wrapper>
+                                </Item>
+                            </div>
+                            <div style={{ padding: '.5rem' }}>
+                                <div style={{ background: 'white' }}><Divider /></div>
+                                <Item>
+                                    <Small>Main Pump</Small>
+                                    <Wrapper >
+                                        <Switch size='small' defaultChecked />
+                                    </Wrapper>
+                                </Item>
+                                <Item>
+                                    <Small>Main Pump</Small>
+                                    <Wrapper>
+                                        <Switch defaultChecked size='small' />
+                                    </Wrapper>
+                                </Item>
+                            </div>
+                            <div style={{ padding: '.5rem' }}>
+                                <div style={{ background: 'white' }}><Divider /></div>
+                                <Item>
+                                    <Small>Main Pump</Small>
+                                    <Wrapper >
+                                        <Switch size='small' defaultChecked />
+                                    </Wrapper>
+                                </Item>
+                                <Item>
+                                    <Small>Main Pump</Small>
+                                    <Wrapper>
+                                        <Switch defaultChecked size='small' />
+                                    </Wrapper>
+                                </Item>
+                            </div>
                         </ControlPanel>
                     </Col>
                     <Col span={19}>
                         <DisplayPanel>
                             {[1, 2].map(room => (
                                 <DataDisplay key={room}>
-                                    <ClimateDisplay climate={this.state.climate} room={room} />
+                                    <ClimateDisplay
+                                        climate={this.state.climate}
+                                        room={room}
+                                    />
                                     <Graph />
                                 </DataDisplay>
                             ))}
+                        </DisplayPanel>
+                        <DisplayPanel>
+                            <ProbDisplay />
                         </DisplayPanel>
                     </Col>
                 </Container>
